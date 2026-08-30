@@ -1,118 +1,41 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DadBod Cut Tracker</title>
-  <style>
-    :root{--bg:#0b1020;--panel:#11182b;--panel2:#17213a;--text:#f7f8fb;--muted:#a9b2c7;--accent:#7dd3fc;--good:#86efac;--warn:#fde68a;--border:#26324e}
-    *{box-sizing:border-box} body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:linear-gradient(180deg,#0b1020 0%,#10172a 100%);color:var(--text);min-height:100vh}
-    .wrap{max-width:980px;margin:0 auto;padding:24px}.hero{display:flex;justify-content:space-between;gap:16px;align-items:end;margin-bottom:20px}.hero h1{margin:0;font-size:clamp(28px,4vw,44px);letter-spacing:-.03em}.hero p{margin:6px 0 0;color:var(--muted)}
-    .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:18px}.card{background:rgba(17,24,43,.94);border:1px solid var(--border);border-radius:20px;padding:18px}.card h2{margin:0 0 12px;font-size:18px}.muted{color:var(--muted)}
-    label{display:block;font-size:13px;color:var(--muted);margin:10px 0 6px}input,textarea,select,button{font:inherit}input,textarea,select{width:100%;background:#0d1426;color:var(--text);border:1px solid var(--border);border-radius:12px;padding:12px 13px;outline:none}textarea{min-height:88px;resize:vertical}input:focus,textarea:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(125,211,252,.12)}
-    button{border:0;border-radius:12px;padding:12px 14px;font-weight:700;cursor:pointer}.primary{background:var(--accent);color:#082032}.secondary{background:#1f2b49;color:var(--text);border:1px solid var(--border)}.row{display:flex;gap:10px}.row>*{flex:1}.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px}.kpi{background:rgba(17,24,43,.94);border:1px solid var(--border);border-radius:16px;padding:14px}.kpi b{display:block;font-size:23px;margin-top:4px}.kpi span{font-size:12px;color:var(--muted)}
-    .log{display:grid;gap:10px}.item{background:#0d1426;border:1px solid var(--border);border-radius:14px;padding:12px}.topline{display:flex;justify-content:space-between;gap:10px}.tag{font-size:12px;padding:4px 8px;border-radius:999px;background:#20304d;color:#d8effd}.good{color:var(--good)}.warn{color:var(--warn)}
-    .coach{border-left:3px solid var(--accent);padding-left:12px;margin-top:10px}.targets{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.target{background:#0d1426;border:1px solid var(--border);border-radius:12px;padding:10px}.target strong{display:block;font-size:18px}.chart{height:180px;display:flex;align-items:end;gap:6px;padding-top:10px}.bar{flex:1;background:linear-gradient(180deg,#7dd3fc,#38bdf8);border-radius:8px 8px 3px 3px;min-width:8px;position:relative}.bar span{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);font-size:10px;color:var(--muted);white-space:nowrap;margin-bottom:4px}
-    .footer{margin-top:18px;color:var(--muted);font-size:12px;line-height:1.5}
-    @media(max-width:760px){.grid{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(2,1fr)}.targets{grid-template-columns:1fr}.hero{align-items:flex-start;flex-direction:column}.row{flex-direction:column}}
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#090713" />
+<title>NovaForm</title>
+<style>
+:root{--bg:#070713;--panel:rgba(17,14,38,.82);--panel2:rgba(12,18,45,.86);--border:rgba(173,118,255,.28);--purple:#a855f7;--violet:#7c3aed;--blue:#38bdf8;--pink:#f472b6;--cyan:#22d3ee;--green:#6ee7b7;--text:#f8f7ff;--muted:#aaa6c7}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--text);background:radial-gradient(circle at 16% 8%,rgba(168,85,247,.24),transparent 28%),radial-gradient(circle at 84% 17%,rgba(56,189,248,.18),transparent 30%),radial-gradient(circle at 50% 82%,rgba(244,114,182,.13),transparent 28%),linear-gradient(145deg,#070713,#0c1027 52%,#080716);background-attachment:fixed}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.5;background-image:radial-gradient(circle,rgba(255,255,255,.78) 0 1px,transparent 1.3px),radial-gradient(circle,rgba(125,211,252,.7) 0 1px,transparent 1.2px);background-size:34px 34px,58px 58px;background-position:8px 13px,23px 5px}.wrap{max-width:1060px;margin:0 auto;padding:22px;position:relative;z-index:1}.brand{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:16px}.logo{display:flex;align-items:center;gap:12px}.orb{width:46px;height:46px;border-radius:50%;background:radial-gradient(circle at 36% 35%,#fff 0 3%,#e879f9 7%,#8b5cf6 28%,#312e81 54%,#09090b 72%);box-shadow:0 0 22px rgba(168,85,247,.7),0 0 42px rgba(56,189,248,.23);position:relative}.orb:after{content:"";position:absolute;inset:9px -6px;border:1px solid rgba(125,211,252,.7);border-radius:50%;transform:rotate(-18deg)}h1{margin:0;font-size:clamp(27px,4vw,43px);letter-spacing:-.04em;background:linear-gradient(90deg,#fff,#e879f9,#7dd3fc);-webkit-background-clip:text;background-clip:text;color:transparent}.tagline{margin:4px 0 0;color:var(--muted);font-size:13px}.goal{font-size:12px;border:1px solid var(--border);padding:8px 10px;border-radius:999px;color:#ddd7f5;background:rgba(16,13,37,.68);white-space:nowrap}.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}.card{background:linear-gradient(145deg,var(--panel),var(--panel2));border:1px solid var(--border);border-radius:18px;box-shadow:inset 0 1px 0 rgba(255,255,255,.04);backdrop-filter:blur(10px)}.kpi{padding:14px}.label{font-size:11px;color:var(--muted)}.value{font-size:23px;font-weight:800;margin-top:5px;letter-spacing:-.03em}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.section{padding:16px}.section h2{margin:0;font-size:17px}.sub{font-size:12px;color:var(--muted);margin-top:4px}label{display:block;font-size:12px;color:#c7c1dd;margin:12px 0 6px}input,textarea,select,button{font:inherit}input,textarea,select{width:100%;min-width:0;border-radius:12px;border:1px solid rgba(167,139,250,.27);background:rgba(6,8,24,.75);color:var(--text);padding:12px 13px;font-size:16px;outline:none}textarea{min-height:96px;resize:vertical}input:focus,textarea:focus,select:focus{border-color:#a78bfa;box-shadow:0 0 0 3px rgba(139,92,246,.15)}.row{display:grid;grid-template-columns:1fr 1fr;gap:9px}.btn{width:100%;min-height:46px;margin-top:11px;border:0;border-radius:12px;font-weight:800;color:white;background:linear-gradient(90deg,#9333ea,#7c3aed 45%,#2563eb);box-shadow:0 0 19px rgba(124,58,237,.3);cursor:pointer}.coach{margin-top:11px;padding:11px 12px;border-radius:12px;background:linear-gradient(90deg,rgba(168,85,247,.11),rgba(56,189,248,.08));border:1px solid rgba(168,85,247,.18);font-size:12px;line-height:1.5;color:#d8d3e9}.trend{height:115px;display:flex;align-items:end;gap:5px;margin-top:11px}.bar{flex:1;min-width:6px;border-radius:7px 7px 2px 2px;background:linear-gradient(180deg,#f472b6,#a855f7 38%,#3b82f6);box-shadow:0 0 11px rgba(168,85,247,.24);position:relative}.bar span{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);font-size:9px;color:var(--muted);margin-bottom:3px}.bottom{display:grid;grid-template-columns:1.1fr .9fr;gap:12px;margin-top:12px}.panel{padding:16px}.head{display:flex;justify-content:space-between;align-items:center;gap:8px}.chip{font-size:10px;padding:4px 7px;border-radius:999px;background:rgba(56,189,248,.1);color:#7dd3fc;border:1px solid rgba(56,189,248,.18)}.log{display:grid;gap:8px;margin-top:10px}.item{padding:11px;border-radius:12px;background:rgba(6,8,24,.65);border:1px solid rgba(125,211,252,.14)}.topline{display:flex;justify-content:space-between;gap:8px}.food{font-size:13px;margin-top:5px}.note{font-size:11px;color:var(--muted);line-height:1.45;margin-top:5px}.target{display:grid;grid-template-columns:72px 1fr 58px;gap:8px;align-items:center;margin-top:11px;font-size:11px}.track{height:7px;border-radius:999px;background:rgba(255,255,255,.07);overflow:hidden}.fill{height:100%;border-radius:inherit;background:linear-gradient(90deg,#9333ea,#38bdf8)}.footer{text-align:center;color:#948db1;font-size:10px;line-height:1.5;margin-top:12px}.secondary{margin-top:10px;background:transparent;color:#b7b1cd;border:1px solid var(--border);border-radius:10px;padding:9px 11px;cursor:pointer}@media(max-width:720px){.wrap{padding:12px}.brand{align-items:flex-start}.kpis{grid-template-columns:repeat(2,1fr)}.grid,.bottom{grid-template-columns:1fr}.value{font-size:20px}.goal{font-size:10px}.row{grid-template-columns:1fr 1fr}}
+</style>
 </head>
 <body>
-<div class="wrap">
-  <div class="hero">
-    <div><h1>DadBod Cut Tracker</h1><p>Morning weight + food log + simple coaching through early November.</p></div>
-    <button class="secondary" id="resetBtn">Reset local data</button>
-  </div>
+<main class="wrap">
+  <header class="brand"><div class="logo"><div class="orb" aria-hidden="true"></div><div><h1>NovaForm</h1><p class="tagline">Build the body. Track the orbit.</p></div></div><div class="goal">Goal · Nov 7</div></header>
 
-  <div class="kpis">
-    <div class="kpi"><span>Latest weight</span><b id="latestWeight">—</b></div>
-    <div class="kpi"><span>7-day average</span><b id="avgWeight">—</b></div>
-    <div class="kpi"><span>Meals today</span><b id="mealCount">0</b></div>
-    <div class="kpi"><span>Days to Nov 7</span><b id="daysLeft">—</b></div>
-  </div>
+  <section class="kpis">
+    <div class="card kpi"><div class="label">Latest weight</div><div id="latest" class="value">—</div></div>
+    <div class="card kpi"><div class="label">7-day average</div><div id="avg" class="value">—</div></div>
+    <div class="card kpi"><div class="label">Meals today</div><div id="count" class="value">0</div></div>
+    <div class="card kpi"><div class="label">Days remaining</div><div id="days" class="value">—</div></div>
+  </section>
 
-  <div class="grid">
-    <section class="card">
-      <h2>Morning check-in</h2>
-      <form id="weightForm">
-        <label for="weight">Morning weight (lb)</label>
-        <div class="row"><input id="weight" type="number" step="0.1" min="100" max="500" placeholder="e.g. 247.6" required><button class="primary" type="submit">Save weight</button></div>
-      </form>
-      <div class="chart" id="weightChart" aria-label="Recent weight trend"></div>
-      <div class="coach" id="weightCoach">Log a morning weight to start your trend.</div>
-    </section>
+  <section class="grid">
+    <form id="weightForm" class="card section"><h2>Morning orbit</h2><div class="sub">One weigh-in. Follow the trend, not the noise.</div><label for="weight">Morning weight (lb)</label><input id="weight" type="number" min="100" max="500" step="0.1" inputmode="decimal" placeholder="248.0" required><button class="btn" type="submit">Log weight ✦</button><div id="trend" class="trend" aria-label="Recent weight trend"></div><div id="weightCoach" class="coach" aria-live="polite">Your 7-day direction matters more than any single morning.</div></form>
 
-    <section class="card">
-      <h2>Quick food entry</h2>
-      <form id="mealForm">
-        <label for="food">What did you eat?</label>
-        <textarea id="food" placeholder="Example: tandoori chicken with rice, mushrooms and 1 tsp ghee" required></textarea>
-        <div class="row">
-          <div><label for="mealTime">Time</label><input id="mealTime" type="time" required></div>
-          <div><label for="mealType">Category</label><select id="mealType"><option value="auto">Auto by time</option><option>Breakfast</option><option>Lunch</option><option>Dinner</option><option>Snack</option></select></div>
-        </div>
-        <button class="primary" type="submit" style="margin-top:12px;width:100%">Add food + get guidance</button>
-      </form>
-      <div class="coach" id="mealCoach">Enter food any time. The app will categorize it and nudge the rest of your day toward your plan.</div>
-    </section>
-  </div>
+    <form id="mealForm" class="card section"><h2>Fuel log</h2><div class="sub">Type what you ate naturally. NovaForm fine-tunes the rest.</div><label for="food">What did you eat?</label><textarea id="food" placeholder="Tandoori chicken, rice, mushrooms, edamame, 10 cashews" required></textarea><div class="row"><div><label for="time">Time</label><input id="time" type="time" required></div><div><label for="type">Category</label><select id="type"><option value="auto">Auto detect</option><option>Breakfast</option><option>Lunch</option><option>Dinner</option><option>Snack</option></select></div></div><button class="btn" type="submit">Add meal ✦</button><div id="mealCoach" class="coach" aria-live="polite">I’ll watch protein, fiber, sodium and calorie-dense extras, then guide your next meal.</div></form>
+  </section>
 
-  <div class="grid" style="margin-top:18px">
-    <section class="card">
-      <h2>Today’s structure</h2>
-      <div class="targets">
-        <div class="target"><span class="muted">Protein</span><strong>130–150g</strong><span class="muted">moderate, not forced</span></div>
-        <div class="target"><span class="muted">Fiber</span><strong>25–35g</strong><span class="muted">increase gradually</span></div>
-        <div class="target"><span class="muted">Calories</span><strong>2,100–2,300</strong><span class="muted">starting range</span></div>
-      </div>
-      <p class="footer">Meal priorities: lean protein, vegetables/fruit, measured rice or potatoes, controlled added fats, plenty of fluids. Keep edamame, cashews and occasional chips—but portion them.</p>
-    </section>
-    <section class="card">
-      <h2>Today’s food log</h2>
-      <div class="log" id="mealLog"><div class="muted">Nothing logged yet.</div></div>
-    </section>
-  </div>
-
-  <p class="footer">This tracker is for organization and habit coaching, not medical diagnosis. With back/sciatica, plantar fascia symptoms, or a recent anal fissure, follow your clinician/PT guidance and avoid pushing through worsening pain or significant bleeding.</p>
-</div>
+  <section class="bottom">
+    <div class="card panel"><div class="head"><h2 style="margin:0;font-size:16px">Today’s fuel</h2><span class="chip">Live log</span></div><div id="log" class="log"><div class="note">Nothing logged yet.</div></div></div>
+    <div class="card panel"><h2 style="margin:0;font-size:16px">Daily orbit</h2><div class="target"><span>Protein</span><div class="track"><div class="fill" style="width:72%"></div></div><span>130–150g</span></div><div class="target"><span>Fiber</span><div class="track"><div class="fill" style="width:65%"></div></div><span>25–35g</span></div><div class="target"><span>Calories</span><div class="track"><div class="fill" style="width:70%"></div></div><span>2100–2300</span></div><div class="coach">Keep the foods you enjoy. Portion the dense ones; let vegetables, fruit, oats and edamame do more of the fullness work.</div><button id="reset" class="secondary" type="button">Reset local data</button></div>
+  </section>
+  <p class="footer">NovaForm stores entries on this browser only. This is a habit tracker, not medical treatment.</p>
+</main>
 <script>
-(() => {
-  const KEY='dadbod-cut-tracker-v1';
-  const state=JSON.parse(localStorage.getItem(KEY)||'{"weights":[],"meals":[]}');
-  const $=id=>document.getElementById(id);
-  const today=()=>new Date().toISOString().slice(0,10);
-  const nowTime=()=>new Date().toTimeString().slice(0,5);
-  $('mealTime').value=nowTime();
-  const save=()=>localStorage.setItem(KEY,JSON.stringify(state));
-  function autoMeal(t){const h=Number(t.split(':')[0]); if(h<11)return 'Breakfast'; if(h<16)return 'Lunch'; if(h<21)return 'Dinner'; return 'Snack';}
-  function guidance(food,cat){
-    const s=food.toLowerCase(); const notes=[];
-    const hasProtein=/(chicken|fish|salmon|cod|halibut|egg|yogurt|edamame|paneer|tofu|protein)/.test(s);
-    const hasFiber=/(vegetable|veggie|mushroom|spinach|broccoli|zucchini|carrot|oat|berry|berries|pear|kiwi|chia|flax|bean|lentil|dal|edamame|sweet potato|apple)/.test(s);
-    const salty=/(chips|cashew|salt|pickle|restaurant|shawarma)/.test(s);
-    const highFat=/(ghee|butter|cream|fried|cashew|nuts|salmon)/.test(s);
-    if(!hasProtein) notes.push('Next meal: include a moderate protein anchor.');
-    if(!hasFiber) notes.push('Add fruit or cooked vegetables to keep fiber moving toward 25–35g.');
-    if(salty) notes.push('Higher-sodium meal: hydrate and do not overreact to tomorrow’s scale.');
-    if(highFat) notes.push('Keep added fats/nuts measured so calories stay controlled.');
-    if(cat==='Snack') notes.push('Keep munching deliberate: one portion, then close the bag.');
-    if(notes.length===0) notes.push('This fits the plan well. Keep the next meal simple and repeatable.');
-    return notes.join(' ');
-  }
-  function render(){
-    const ws=state.weights.slice(-14); const latest=ws.at(-1); $('latestWeight').textContent=latest?latest.value.toFixed(1)+' lb':'—';
-    const last7=state.weights.slice(-7); $('avgWeight').textContent=last7.length?(last7.reduce((a,b)=>a+b.value,0)/last7.length).toFixed(1)+' lb':'—';
-    const mealsToday=state.meals.filter(m=>m.date===today()); $('mealCount').textContent=mealsToday.length;
-    const goal=new Date('2026-11-07T00:00:00'); const diff=Math.max(0,Math.ceil((goal-new Date())/86400000)); $('daysLeft').textContent=diff;
-    const chart=$('weightChart'); chart.innerHTML=''; if(ws.length){const vals=ws.map(w=>w.value), min=Math.min(...vals)-1,max=Math.max(...vals)+1; ws.forEach(w=>{const b=document.createElement('div'); b.className='bar'; b.style.height=(35+((w.value-min)/(max-min||1))*115)+'px'; b.title=w.date+' • '+w.value+' lb'; const sp=document.createElement('span'); sp.textContent=w.value.toFixed(1); b.appendChild(sp); chart.appendChild(b);});}
-    const coach=$('weightCoach'); if(last7.length>=2){const first=state.weights.slice(-14,-7); const a1=first.length?first.reduce((a,b)=>a+b.value,0)/first.length:null; const a2=last7.reduce((a,b)=>a+b.value,0)/last7.length; coach.textContent=a1===null?'Keep logging; we will judge the 7-day trend, not one reading.':a2<a1?'Trend is moving down. Keep the plan unchanged.':'Trend is flat/up right now. Stay consistent first; only adjust after about 2 weeks of true stall.';}
-    const log=$('mealLog'); log.innerHTML=''; if(!mealsToday.length){log.innerHTML='<div class="muted">Nothing logged yet.</div>';} else mealsToday.slice().reverse().forEach(m=>{const el=document.createElement('div');el.className='item';el.innerHTML='<div class="topline"><strong>'+m.category+'</strong><span class="tag">'+m.time+'</span></div><div style="margin-top:6px">'+m.food.replace(/[<>&]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]))+'</div><div class="muted" style="margin-top:6px">'+m.guidance+'</div>';log.appendChild(el);});
-  }
-  $('weightForm').addEventListener('submit',e=>{e.preventDefault(); const v=Number($('weight').value); if(!Number.isFinite(v)||v<100||v>500)return; const d=today(); const existing=state.weights.find(w=>w.date===d); if(existing) existing.value=v; else state.weights.push({date:d,value:v}); save(); $('weight').value=''; render();});
-  $('mealForm').addEventListener('submit',e=>{e.preventDefault(); const food=$('food').value.trim(); if(!food)return; const time=$('mealTime').value||nowTime(); const selected=$('mealType').value; const category=selected==='auto'?autoMeal(time):selected; const g=guidance(food,category); state.meals.push({date:today(),time,category,food,guidance:g}); save(); $('food').value=''; $('mealCoach').textContent=g; render();});
-  $('resetBtn').addEventListener('click',()=>{if(confirm('Clear all saved weights and meals on this browser?')){state.weights=[];state.meals=[];save();render();}});
-  render();
-})();
+(()=>{const KEY='novaform-v1';let state;try{state=JSON.parse(localStorage.getItem(KEY)||'{"weights":[],"meals":[]}')}catch{state={weights:[],meals:[]}};const $=s=>document.querySelector(s),today=()=>new Date().toISOString().slice(0,10),now=()=>new Date().toTimeString().slice(0,5);$('#time').value=now();const save=()=>localStorage.setItem(KEY,JSON.stringify(state));function cat(t){const h=+t.split(':')[0];return h<11?'Breakfast':h<16?'Lunch':h<21?'Dinner':'Snack'}function advice(food,c){const s=food.toLowerCase(),n=[];if(!/(chicken|fish|salmon|cod|halibut|egg|yogurt|edamame|paneer|tofu|protein)/.test(s))n.push('Next meal: add a moderate protein anchor.');if(!/(vegetable|veggie|mushroom|spinach|broccoli|zucchini|carrot|oat|berry|berries|pear|kiwi|chia|flax|bean|lentil|dal|edamame|sweet potato|apple|fruit)/.test(s))n.push('Add fruit or cooked vegetables to move fiber toward target.');if(/(chips|cashew|salt|pickle|restaurant|shawarma)/.test(s))n.push('Higher sodium: hydrate and ignore short-term scale noise.');if(/(ghee|butter|cream|fried|cashew|nuts|salmon)/.test(s))n.push('Keep calorie-dense fats measured.');if(c==='Snack')n.push('Keep munching deliberate: one portion, then close the bag.');return n.length?n.join(' '):'Strong fit. Keep the next meal simple, fiber-forward and repeatable.'}function render(){const recent=state.weights.slice(-7),latest=recent.at(-1);$('#latest').textContent=latest?latest.v.toFixed(1)+' lb':'—';$('#avg').textContent=recent.length?(recent.reduce((a,b)=>a+b.v,0)/recent.length).toFixed(1)+' lb':'—';const todays=state.meals.filter(m=>m.d===today());$('#count').textContent=todays.length;const goal=new Date('2026-11-07T00:00:00');$('#days').textContent=Math.max(0,Math.ceil((goal-new Date())/86400000));const tr=$('#trend');tr.innerHTML='';if(recent.length){const vals=recent.map(x=>x.v),mi=Math.min(...vals)-1,ma=Math.max(...vals)+1;recent.forEach(x=>{const b=document.createElement('div');b.className='bar';b.style.height=(25+70*((x.v-mi)/(ma-mi||1)))+'%';const sp=document.createElement('span');sp.textContent=x.v.toFixed(1);b.appendChild(sp);tr.appendChild(b)})}const log=$('#log');log.innerHTML='';if(!todays.length)log.innerHTML='<div class="note">Nothing logged yet.</div>';else todays.slice().reverse().forEach(m=>{const item=document.createElement('div');item.className='item';const top=document.createElement('div');top.className='topline';const strong=document.createElement('strong');strong.textContent=m.c;const time=document.createElement('span');time.className='chip';time.textContent=m.t;top.append(strong,time);const food=document.createElement('div');food.className='food';food.textContent=m.f;const note=document.createElement('div');note.className='note';note.textContent=m.g;item.append(top,food,note);log.appendChild(item)})}$('#weightForm').addEventListener('submit',e=>{e.preventDefault();const v=Number($('#weight').value);if(!Number.isFinite(v)||v<100||v>500){$('#weightCoach').textContent='Enter a valid weight.';return}const d=today(),old=state.weights.find(x=>x.d===d);old?old.v=v:state.weights.push({d,v});save();$('#weight').value='';$('#weightCoach').textContent='Logged. Follow the orbit: judge the 7-day trend, not one morning.';render()});$('#mealForm').addEventListener('submit',e=>{e.preventDefault();const f=$('#food').value.trim(),t=$('#time').value;if(!f||!t)return;const selected=$('#type').value,c=selected==='auto'?cat(t):selected,g=advice(f,c);state.meals.push({d:today(),t,c,f,g});save();$('#food').value='';$('#mealCoach').textContent=g;render()});$('#reset').addEventListener('click',()=>{if(confirm('Clear all saved NovaForm data on this browser?')){state={weights:[],meals:[]};save();render()}});render()})();
 </script>
 </body>
 </html>
